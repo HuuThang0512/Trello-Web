@@ -1,33 +1,58 @@
-import { useState } from "react"
-import reactLogo from "./assets/react.svg"
-import viteLogo from "/vite.svg"
-import "./App.css"
+import { useColorScheme } from "@mui/material/styles"
+import Select from "@mui/material/Select"
+import { Box, FormControl, InputLabel, MenuItem } from "@mui/material"
+import LightModeIcon from "@mui/icons-material/LightMode"
+import DarkModeIcon from "@mui/icons-material/DarkMode"
+import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest"
 
-function App() {
-  const [count, setCount] = useState(0)
+function ModeSelect() {
+  const { mode, setMode } = useColorScheme()
+
+  const handleChange = (event) => {
+    setMode(event.target.value)
+  }
 
   return (
+    <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+      <InputLabel id="demo-select-small-label">Mode</InputLabel>
+      <Select
+        labelId="demo-select-small-label"
+        id="demo-select-small"
+        value={mode}
+        label="Age"
+        onChange={handleChange}
+      >
+        <MenuItem value={"light"}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+            <LightModeIcon fontSize="small" />
+            Light
+          </Box>
+        </MenuItem>
+        <MenuItem value={"dark"}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+            <DarkModeIcon fontSize="small" />
+            Dark
+          </Box>
+        </MenuItem>
+        <MenuItem value={"system"}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+            <SettingsSuggestIcon fontSize="small" />
+            System
+          </Box>
+        </MenuItem>
+      </Select>
+    </FormControl>
+  )
+}
+
+function App() {
+  return (
     <>
-      <div>
-        <a href="https://vitejs.dev" rel="noreferrer" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" rel="noreferrer" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div style={{ padding: "20px" }}>
+        <br />
+        <ModeSelect />
+        <br />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
