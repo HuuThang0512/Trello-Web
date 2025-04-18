@@ -1,24 +1,57 @@
 import { useColorScheme } from "@mui/material/styles"
-import { Button } from "@mui/material"
+import Select from "@mui/material/Select"
+import { Box, FormControl, InputLabel, MenuItem } from "@mui/material"
+import LightModeIcon from "@mui/icons-material/LightMode"
+import DarkModeIcon from "@mui/icons-material/DarkMode"
+import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest"
 
-function ModeToggle() {
+function ModeSelect() {
   const { mode, setMode } = useColorScheme()
+
+  const handleChange = (event) => {
+    setMode(event.target.value)
+  }
+
   return (
-    <Button
-      onClick={() => {
-        setMode(mode == "light" ? "dark" : "light")
-      }}
-    >
-      {mode == "light" ? "Turn Dark" : "Turn Light"}
-    </Button>
+    <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+      <InputLabel id="demo-select-small-label">Mode</InputLabel>
+      <Select
+        labelId="demo-select-small-label"
+        id="demo-select-small"
+        value={mode}
+        label="Age"
+        onChange={handleChange}
+      >
+        <MenuItem value={"light"}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+            <LightModeIcon fontSize="small" />
+            Light
+          </Box>
+        </MenuItem>
+        <MenuItem value={"dark"}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+            <DarkModeIcon fontSize="small" />
+            Dark
+          </Box>
+        </MenuItem>
+        <MenuItem value={"system"}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+            <SettingsSuggestIcon fontSize="small" />
+            System
+          </Box>
+        </MenuItem>
+      </Select>
+    </FormControl>
   )
 }
 
 function App() {
   return (
     <>
-      <div>
-        <ModeToggle />
+      <div style={{ padding: "20px" }}>
+        <br />
+        <ModeSelect />
+        <br />
       </div>
     </>
   )
