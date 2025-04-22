@@ -12,13 +12,13 @@ import PersonAddIcon from "@mui/icons-material/PersonAdd"
 import Button from "@mui/material/Button"
 
 const chipStyle = {
-  color: "primary.main",
+  color: "white",
   backgroundColor: "transparent",
   border: "none",
   paddingX: "5px",
   borderRadius: "6px",
-  "& .MuiSvgIcon-root": {
-    color: "primary.main"
+  ".MuiSvgIcon-root": {
+    color: "white"
   },
   "&:hover": {
     backgroundColor: "primary.50"
@@ -37,7 +37,9 @@ const BoardBar = () => {
         gap: 2,
         paddingX: 2,
         overflowX: "auto",
-        borderTop: "1px solid #00bfa5"
+        borderBottom: "1px solid white",
+        backgroundColor: (theme) =>
+          theme.palette.mode == "dark" ? "#34495e" : "#1976d2"
       }}
     >
       <Box
@@ -85,13 +87,28 @@ const BoardBar = () => {
           gap: 2
         }}
       >
-        <Button variant="outlined" startIcon={<PersonAddIcon />}>
+        <Button
+          variant="outlined"
+          startIcon={<PersonAddIcon />}
+          sx={{
+            color: "white",
+            borderColor: "white",
+            "&:hover": { borderColor: "white" }
+          }}
+        >
           Invite
         </Button>
         <AvatarGroup
           max={5}
           sx={{
-            "& .MuiAvatar-root": { width: 32, height: 32, fontSize: "14px" }
+            gap: "10px",
+            "& .MuiAvatar-root": {
+              width: 32,
+              height: 32,
+              fontSize: "14px",
+              cursor: "pointer",
+              border: "none"
+            }
           }}
         >
           <Tooltip>
