@@ -11,6 +11,8 @@ import AvatarGroup from "@mui/material/AvatarGroup"
 import PersonAddIcon from "@mui/icons-material/PersonAdd"
 import Button from "@mui/material/Button"
 
+import { capitalizeFirstLetter } from "~/utils/formatters"
+
 const chipStyle = {
   color: "white",
   backgroundColor: "transparent",
@@ -25,7 +27,7 @@ const chipStyle = {
   }
 }
 
-const BoardBar = () => {
+const BoardBar = ({ board }) => {
   return (
     <Box
       sx={{
@@ -51,13 +53,13 @@ const BoardBar = () => {
         <Chip
           sx={chipStyle}
           icon={<WidgetsIcon />}
-          label="Huu Thang's Board"
+          label={board.title}
           clickable
         />
         <Chip
           sx={chipStyle}
           icon={<VpnLockIcon />}
-          label="Public/Private Workspace"
+          label={capitalizeFirstLetter(board.type)}
           clickable
         />
         <Chip
