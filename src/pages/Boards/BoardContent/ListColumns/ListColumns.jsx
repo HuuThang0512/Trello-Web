@@ -3,7 +3,7 @@ import Column from "./Column/Column"
 import Button from "@mui/material/Button"
 import AddCircleIcon from "@mui/icons-material/AddCircle"
 
-const ListColumns = () => {
+const ListColumns = ({ columns }) => {
   return (
     <Box
       sx={{
@@ -18,8 +18,10 @@ const ListColumns = () => {
         }
       }}
     >
-      <Column />
-      <Column />
+      {columns?.map((column) => (
+        <Column column={column} key={column._id} />
+      ))}
+
       <Box
         sx={{
           minWidth: "200px",
