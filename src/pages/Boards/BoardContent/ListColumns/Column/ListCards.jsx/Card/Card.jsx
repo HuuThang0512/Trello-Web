@@ -7,18 +7,41 @@ import CardMedia from "@mui/material/CardMedia"
 import GroupsIcon from "@mui/icons-material/Groups"
 import CommentIcon from "@mui/icons-material/Comment"
 import AttachmentIcon from "@mui/icons-material/Attachment"
+import { useSortable } from "@dnd-kit/sortable"
+import { CSS } from "@dnd-kit/utilities"
 
 const Card = ({ card }) => {
   const shouldShowCardActions =
     !!card?.memberIds?.length > 0 ||
     !!card?.comments?.length > 0 ||
     !!card?.attachments?.length > 0
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging
+  } = useSortable({ id: card._id, data: { ...card } })
+
+  const dndKitCardStyle = {
+    // touchAcion: "none",
+    transform: CSS.Translate.toString(transform),
+    transition,
+    opacity: isDragging ? 0.5 : undefined,
+    border: isDragging ? "1px solid #42a5f5" : undefined
+  }
   return (
     <MuiCard
+      ref={setNodeRef}
+      style={dndKitCardStyle}
+      {...attributes}
+      {...listeners}
       sx={{
         cursor: "pointer",
         boxShadow: "0 1px 1px rgba(0, 0, 0, 0.2)",
-        overflow: "unset"
+        overflow: "unset",
+        display: card.FE_placeholderCard ? "none" : "block"
       }}
     >
       {card?.cover && (
