@@ -20,14 +20,18 @@ const chipStyle = {
   paddingX: "5px",
   borderRadius: "6px",
   ".MuiSvgIcon-root": {
-    color: "white"
+    color: "white",
   },
   "&:hover": {
-    backgroundColor: "primary.50"
-  }
+    backgroundColor: "primary.50",
+  },
 }
 
 const BoardBar = ({ board }) => {
+  if (!board) {
+    return null
+  }
+
   return (
     <Box
       sx={{
@@ -40,26 +44,28 @@ const BoardBar = ({ board }) => {
         paddingX: 2,
         overflowX: "auto",
         backgroundColor: (theme) =>
-          theme.palette.mode == "dark" ? "#34495e" : "#1976d2"
+          theme.palette.mode == "dark" ? "#34495e" : "#1976d2",
       }}
     >
       <Box
         sx={{
           display: "flex",
           alignItems: "center",
-          gap: 2
+          gap: 2,
         }}
       >
-        <Chip
-          sx={chipStyle}
-          icon={<WidgetsIcon />}
-          label={board.title}
-          clickable
-        />
+        <Tooltip title={board?.description}>
+          <Chip
+            sx={chipStyle}
+            icon={<WidgetsIcon />}
+            label={board?.title || "No Title"}
+            clickable
+          />
+        </Tooltip>
         <Chip
           sx={chipStyle}
           icon={<VpnLockIcon />}
-          label={capitalizeFirstLetter(board.type)}
+          label={board?.type ? capitalizeFirstLetter(board.type) : "No Type"}
           clickable
         />
         <Chip
@@ -85,7 +91,7 @@ const BoardBar = ({ board }) => {
         sx={{
           display: "flex",
           alignItems: "center",
-          gap: 2
+          gap: 2,
         }}
       >
         <Button
@@ -94,7 +100,7 @@ const BoardBar = ({ board }) => {
           sx={{
             color: "white",
             borderColor: "white",
-            "&:hover": { borderColor: "white" }
+            "&:hover": { borderColor: "white" },
           }}
         >
           Invite
@@ -108,8 +114,8 @@ const BoardBar = ({ board }) => {
               height: 32,
               fontSize: "14px",
               cursor: "pointer",
-              border: "none"
-            }
+              border: "none",
+            },
           }}
         >
           <Tooltip>

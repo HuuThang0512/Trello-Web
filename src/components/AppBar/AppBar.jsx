@@ -2,7 +2,7 @@ import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
 import ModeSelect from "~/components/ModeSelect/ModeSelect"
 import AppsIcon from "@mui/icons-material/Apps"
-import { ReactComponent as TrelloIcon } from "~/assets/trello.svg"
+import {ReactComponent as TrelloIcon} from "~/assets/trello.svg"
 import SvgIcon from "@mui/material/SvgIcon"
 import Workspaces from "./Menu/Workspaces"
 import Recent from "./Menu/Recent"
@@ -19,7 +19,7 @@ import LibraryAddIcon from "@mui/icons-material/LibraryAdd"
 import InputAdornment from "@mui/material/InputAdornment"
 import SearchIcon from "@mui/icons-material/Search"
 import CloseIcon from "@mui/icons-material/Close"
-import { useState } from "react"
+import {useState} from "react"
 
 const AppBar = () => {
   const [searchValue, setSearchValue] = useState("")
@@ -35,49 +35,49 @@ const AppBar = () => {
         paddingX: 2,
         overflowX: "auto",
         backgroundColor: (theme) =>
-          theme.palette.mode == "dark" ? "#2c3e50" : "#1565c0"
+          theme.palette.mode == "dark" ? "#2c3e50" : "#1565c0",
       }}
     >
       <Box
         sx={{
           display: "flex",
           alignItems: "center",
-          gap: 2
+          gap: 2,
         }}
       >
-        <AppsIcon sx={{ color: "white", cursor: "pointer" }} />
+        <AppsIcon sx={{color: "white", cursor: "pointer"}} />
         <Box
           sx={{
             display: "flex",
             alignItems: "center",
             gap: 0.5,
-            cursor: "pointer"
+            cursor: "pointer",
           }}
         >
           <SvgIcon
             component={TrelloIcon}
             inheritViewBox
             fontSize="small"
-            sx={{ color: "white" }}
+            sx={{color: "white"}}
           />
           <Typography
             variant="span"
             sx={{
               fontSize: "1.2rem",
               fontWeight: "bold",
-              color: "white"
+              color: "white",
             }}
           >
             Trello
           </Typography>
         </Box>
 
-        <Box sx={{ display: { xs: "none", md: "flex" }, gap: 1 }}>
+        <Box sx={{display: {xs: "none", md: "flex"}, gap: 1}}>
           <Workspaces />
           <Recent />
           <Starred />
           <Templates />
-          <Button sx={{ color: "white" }} startIcon={<LibraryAddIcon />}>
+          <Button sx={{color: "white"}} startIcon={<LibraryAddIcon />}>
             Create
           </Button>
         </Box>
@@ -86,7 +86,7 @@ const AppBar = () => {
         sx={{
           display: "flex",
           alignItems: "center",
-          gap: 1.5
+          gap: 1.5,
         }}
       >
         <TextField
@@ -99,43 +99,45 @@ const AppBar = () => {
           sx={{
             minWidth: "120px",
             maxWidth: "180px",
-            "& label": { color: "white" },
-            "& input": { color: "white" },
-            "& label.Mui-focused": { color: "white" },
+            "& label": {color: "white"},
+            "& input": {color: "white"},
+            "& label.Mui-focused": {color: "white"},
             "& .MuiOutlinedInput-root": {
-              "& fieldset": { borderColor: "white" },
-              "&:hover fieldset": { borderColor: "white" },
-              "&.Mui-focused fieldset": { borderColor: "white" }
-            }
+              "& fieldset": {borderColor: "white"},
+              "&:hover fieldset": {borderColor: "white"},
+              "&.Mui-focused fieldset": {borderColor: "white"},
+            },
           }}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <SearchIcon sx={{ color: "white" }} />
+                <SearchIcon sx={{color: "white"}} />
               </InputAdornment>
             ),
             endAdornment: (
-              <CloseIcon
-                onClick={() => setSearchValue("")}
-                fontSize="small"
-                sx={{
-                  color: "white",
-                  cursor: "pointer",
-                  display: `${searchValue ? "block" : "none"}`
-                }}
-              />
-            )
+              <InputAdornment position="end">
+                <CloseIcon
+                  onClick={() => setSearchValue("")}
+                  fontSize="small"
+                  sx={{
+                    color: "white",
+                    cursor: "pointer",
+                    display: `${searchValue ? "block" : "none"}`,
+                  }}
+                />
+              </InputAdornment>
+            ),
           }}
         />
 
         <ModeSelect />
         <Tooltip title="Notifications">
-          <Badge color="warning" variant="dot" sx={{ cursor: "pointer" }}>
-            <NotificationsNoneIcon sx={{ color: "white" }} />
+          <Badge color="warning" variant="dot" sx={{cursor: "pointer"}}>
+            <NotificationsNoneIcon sx={{color: "white"}} />
           </Badge>
         </Tooltip>
         <Tooltip title="Help">
-          <HelpOutlineIcon sx={{ cursor: "pointer", color: "white" }} />
+          <HelpOutlineIcon sx={{cursor: "pointer", color: "white"}} />
         </Tooltip>
         <Profiles />
       </Box>
