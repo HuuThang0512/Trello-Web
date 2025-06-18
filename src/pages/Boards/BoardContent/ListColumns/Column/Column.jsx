@@ -191,6 +191,7 @@ const Column = ({column}) => {
                 variant="outlined"
                 size="small"
                 autoFocus
+                data-no-dnd="true"
                 value={newCardTitle}
                 onChange={(e) => setNewCardTitle(e.target.value)}
                 sx={{
@@ -232,6 +233,7 @@ const Column = ({column}) => {
                   color="success"
                   size="small"
                   onClick={addNewCard}
+                  data-no-dnd="true"
                   sx={{
                     boxShadow: "none",
                     border: "0.5px solid",
