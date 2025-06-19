@@ -23,6 +23,7 @@ import {mapOrder} from "~/utils/sorts"
 
 import {useSortable} from "@dnd-kit/sortable"
 import {CSS} from "@dnd-kit/utilities"
+import {toast} from "react-toastify"
 
 const Column = ({column}) => {
   const {attributes, listeners, setNodeRef, transform, transition, isDragging} =
@@ -45,7 +46,10 @@ const Column = ({column}) => {
   }
   const [newCardTitle, setNewCardTitle] = useState("")
   const addNewCard = () => {
-    if (!newCardTitle) return
+    if (!newCardTitle) {
+      toast.error("Please enter a card title", {position: "bottom-right"})
+      return
+    }
     // Gọi API ỏ đây
     toggleNewCardForm()
   }
