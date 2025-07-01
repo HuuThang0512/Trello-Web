@@ -29,7 +29,7 @@ const ACTIVE_DRAG_ITEM_TYPE = {
   CARD: "ACTIVE_DRAG_ITEM_TYPE_CARD"
 }
 
-const BoardContent = ({ board }) => {
+const BoardContent = ({ board, createNewColumn, createNewCard }) => {
   // Yêu cầu chuột di chuyển 10px mới kích hoạt event, phòng trường hợp click chuột cũng gọi event
   // const pointerSensor = useSensor(PointerSensor, {
   //   activationConstraint: {
@@ -59,6 +59,7 @@ const BoardContent = ({ board }) => {
   const [oldColumnWhenDraggingCard, setOldColumnWhenDraggingCard] =
     useState(null)
 
+  // Phần này để cập nhật mảng columns theo đúng thứ tự OrderIds của board
   useEffect(() => {
     setOrderedColumns(mapOrder(board?.columns, board?.columnOrderIds, "_id"))
   }, [board])
@@ -346,7 +347,7 @@ const BoardContent = ({ board }) => {
           p: "10px 0"
         }}
       >
-        <ListColumns columns={orderedColumns} />
+        <ListColumns columns={orderedColumns} createNewColumn={createNewColumn} createNewCard={createNewCard} />
         <DragOverlay dropAnimation={customDropAnimation}>
           {!activeDragItemType && null}
           {activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.COLUMN && (

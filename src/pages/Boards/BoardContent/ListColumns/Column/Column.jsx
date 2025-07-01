@@ -25,7 +25,7 @@ import {useSortable} from "@dnd-kit/sortable"
 import {CSS} from "@dnd-kit/utilities"
 import {toast} from "react-toastify"
 
-const Column = ({column}) => {
+const Column = ({column, createNewCard}) => {
   const {attributes, listeners, setNodeRef, transform, transition, isDragging} =
     useSortable({id: column._id, data: {...column}})
 
@@ -43,14 +43,19 @@ const Column = ({column}) => {
   const [openNewCardForm, setOpenNewCardForm] = useState(false)
   const toggleNewCardForm = () => {
     setOpenNewCardForm(!openNewCardForm)
+    setNewCardTitle("")
   }
   const [newCardTitle, setNewCardTitle] = useState("")
-  const addNewCard = () => {
+  const addNewCard = async () => {
     if (!newCardTitle) {
       toast.error("Please enter a card title", {position: "bottom-right"})
       return
     }
-    // Gọi API ỏ đây
+    const newCardData = {
+      title: newCardTitle,
+      columnId: column._id,
+    }
+    await createNewCard(newCardData)
     toggleNewCardForm()
   }
 
@@ -202,7 +207,7 @@ const Column = ({column}) => {
                   "& label": {color: "text.primary"},
                   "& input": {
                     color: (theme) => theme.palette.primary.main,
-                    bgcolor: (theme) =>
+                  bgcolor: (theme) =>
                       theme.palette.mode === "dark" ? "#333643" : "white",
                   },
                   "& label.Mui-focused": {
@@ -251,7 +256,7 @@ const Column = ({column}) => {
                   onClick={toggleNewCardForm}
                   fontSize="small"
                   sx={{
-                    color: "white",
+                    color: (theme) => theme.palette.text.primary,
                     cursor: "pointer",
                     "&:hover": {color: (theme) => theme.palette.warning.light},
                     // display: `${searchValue ? "block" : "none"}`,
